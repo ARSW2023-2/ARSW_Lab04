@@ -12,11 +12,19 @@ import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author hcadavid
  */
+//@Service
+//@Qualifier("memory")
 public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     private final Map<Tuple<String,String>,Blueprint> blueprints=new HashMap<>();
@@ -44,6 +52,17 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         return blueprints.get(new Tuple<>(author, bprintname));
     }
 
-    
+    @Override
+    public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
+        return blueprints.entrySet().stream()
+                        .filter((entry)->entry.getKey().getElem1().equals(author))
+                        .map(entry -> entry.getValue())
+                        .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<Blueprint> getAllBlueprints(){
+        return blueprints.values().stream().collect(Collectors.toSet());
+    }
     
 }
