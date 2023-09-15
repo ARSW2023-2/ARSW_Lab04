@@ -23,8 +23,8 @@ import org.springframework.stereotype.Service;
  *
  * @author hcadavid
  */
-@Service
-@Qualifier("memory")
+//@Service
+//@Qualifier("memory")
 public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     private final Map<Tuple<String,String>,Blueprint> blueprints=new HashMap<>();
