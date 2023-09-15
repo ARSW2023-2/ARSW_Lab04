@@ -14,16 +14,22 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
  *
  * @author hcadavid
  */
-//@Service
+@Service("Blueprint")
 public class BlueprintsServices {
+
+    @Autowired
+    @Qualifier("Redundante")
+    BlueprintFilters fltrar;
    
     @Autowired
+    @Qualifier("Memory")
     BlueprintsPersistence bpp;
     
     public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException{

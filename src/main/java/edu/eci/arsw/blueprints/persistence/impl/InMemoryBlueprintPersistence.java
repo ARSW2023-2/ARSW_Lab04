@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
  *
  * @author hcadavid
  */
-//@Service
+@Service ("Memory")
 //@Qualifier("memory")
 public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
